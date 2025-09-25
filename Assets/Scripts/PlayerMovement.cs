@@ -15,12 +15,12 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Update()
-    {
-        // Input bruto para movimiento 4 direcciones (WASD / Flechas)
-        movement.x = Input.GetAxisRaw("Horizontal"); // -1,0,1
-        movement.y = Input.GetAxisRaw("Vertical");
-        movement = movement.normalized; // evita velocidad diagonal > 1
-    }
+{
+    movement.x = Input.GetAxisRaw("Horizontal");
+    movement.y = Input.GetAxisRaw("Vertical");
+
+    Debug.Log("Movimiento: " + movement);
+}
 
     void FixedUpdate()
     {

@@ -2,21 +2,38 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform target;          // arrastra el Player aquí
-    public float smoothing = 5f;
+    public Transform player;      // El jugador que sigue la cámara
+    public Transform background;  // El fondo (sprite del mapa)
 
-    private Vector3 offset;
+    private float minX, maxX, minY, maxY;
+    private float camHalfHeight, camHalfWidth;
 
     void Start()
     {
-        if (target == null) return;
-        offset = transform.position - target.position;
+        Camera cam = Camera.main;
+        camHalfHeight = cam.orthographicSize;
+        camHalfWidth = camHalfHeight * Screen.width / Screen.height;
+
+        // Obtener tamaño del sprite del fondo
+        SpriteRenderer sr = background.GetComponent<SpriteRenderer>();
+        float bgWidth = sr.bounds.size.x;
+        float bgHeight = sr.bounds.size.y;
+
+        // Calcular límites
+        minX = background.position.x - bgWidth / 2 + camHalfWidth;
+        maxX = background.position.x + bgWidth / 2 - camHalfWidth;
+        minY = background.position.y - bgHeight / 2 + camHalfHeight;
+        maxY = background.position.y + bgHeight / 2 - camHalfHeight;
     }
 
-    void FixedUpdate()
+    void LateUpdate()
     {
-        if (target == null) return;
-        Vector3 targetCamPos = target.position + offset;
-        transform.position = Vector3.Lerp(transform.position, targetCamPos, smoothing * Time.fixedDeltaTime);
+        if (player != null)
+        {
+            float targetX = Mathf.Clamp(player.position.x, minX, maxX);
+            float targetY = Mathf.Clamp(player.position.y, minY, maxY);
+
+            transform.position = new Vector3(targetX, targetY, transform.position.z);
+        }
     }
 }
