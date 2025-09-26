@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5c3568699a2f9ae4ab56a6851de71064
+guid: c929c316e36a71f4d89a68f6a28b2cb9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2464306438850978715
-    second: carro_0
+      213: -2688183179180128744
+    second: 0ae956cd-3198-425b-960a-d0269e899342_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: carro_0
+      name: 0ae956cd-3198-425b-960a-d0269e899342_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1024
-        height: 1024
+        x: 271
+        y: 88
+        width: 467
+        height: 783
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b93ab6156a9f23220800000000000000
-      internalID: 2464306438850978715
+      spriteID: 816c9c124a7a1bad0800000000000000
+      internalID: -2688183179180128744
       vertices: []
       indices: 
       edges: []
@@ -134,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      carro_0: 2464306438850978715
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
