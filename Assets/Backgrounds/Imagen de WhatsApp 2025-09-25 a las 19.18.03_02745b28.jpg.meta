@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f84891a2f7f2c5840982e99376097203
+guid: 555d056819f6a5344b630fc35fe980fe
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4084080605589266599
-    second: fondo carrera_0
+      213: 6516160734786731708
+    second: Imagen de WhatsApp 2025-09-25 a las 19.18.03_02745b28_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,11 +96,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fondo carrera_0
+      name: Imagen de WhatsApp 2025-09-25 a las 19.18.03_02745b28_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 95f1acdd35e6257c0800000000000000
-      internalID: -4084080605589266599
+      spriteID: cbebf480aad0e6a50800000000000000
+      internalID: 6516160734786731708
       vertices: []
       indices: 
       edges: []
@@ -134,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      fondo carrera_0: -4084080605589266599
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
