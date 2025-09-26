@@ -2,38 +2,43 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform player;      // El jugador que sigue la cámara
-    public Transform background;  // El fondo (sprite del mapa)
+    public Transform target;          // El carro
+    public float smoothSpeed = 0.125f;
+    public Vector3 offset;
+    public SpriteRenderer mapRenderer; // Asigna aquí el sprite del circuito en el Inspector
 
-    private float minX, maxX, minY, maxY;
-    private float camHalfHeight, camHalfWidth;
+    float minX, maxX, minY, maxY;
 
     void Start()
     {
-        Camera cam = Camera.main;
-        camHalfHeight = cam.orthographicSize;
-        camHalfWidth = camHalfHeight * Screen.width / Screen.height;
+        // Tamaño del mapa en mundo
+        float mapWidth = mapRenderer.bounds.size.x;
+        float mapHeight = mapRenderer.bounds.size.y;
 
-        // Obtener tamaño del sprite del fondo
-        SpriteRenderer sr = background.GetComponent<SpriteRenderer>();
-        float bgWidth = sr.bounds.size.x;
-        float bgHeight = sr.bounds.size.y;
+        // Tamaño visible de la cámara
+        float camHeight = Camera.main.orthographicSize * 2f;
+        float camWidth = camHeight * Screen.width / Screen.height;
 
-        // Calcular límites
-        minX = background.position.x - bgWidth / 2 + camHalfWidth;
-        maxX = background.position.x + bgWidth / 2 - camHalfWidth;
-        minY = background.position.y - bgHeight / 2 + camHalfHeight;
-        maxY = background.position.y + bgHeight / 2 - camHalfHeight;
+        // Calcular límites para que no se salga de los bordes
+        minX = -mapWidth / 2f + camWidth / 2f;
+        maxX =  mapWidth / 2f - camWidth / 2f;
+        minY = -mapHeight / 2f + camHeight / 2f;
+        maxY =  mapHeight / 2f - camHeight / 2f;
     }
 
     void LateUpdate()
     {
-        if (player != null)
+        if (target != null)
         {
-            float targetX = Mathf.Clamp(player.position.x, minX, maxX);
-            float targetY = Mathf.Clamp(player.position.y, minY, maxY);
+            // Posición deseada con suavizado
+            Vector3 desiredPosition = target.position + offset;
+            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
 
-            transform.position = new Vector3(targetX, targetY, transform.position.z);
+            // Restringir la cámara dentro de los límites
+            float clampX = Mathf.Clamp(smoothedPosition.x, minX, maxX);
+            float clampY = Mathf.Clamp(smoothedPosition.y, minY, maxY);
+
+            transform.position = new Vector3(clampX, clampY, transform.position.z);
         }
     }
 }
