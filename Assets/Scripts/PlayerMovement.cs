@@ -1,77 +1,61 @@
 using UnityEngine;
-using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Movimiento")]
-    public float moveSpeed = 5f;          // Velocidad de avance/reversa
+    public float moveSpeed = 8f;          // Velocidad base del carro
     public float rotationSpeed = 200f;    // Velocidad de giro
+    public float speedBoost = 3f;         // Cuánto aumenta la velocidad por cada rayito
+    public int maxBananas = 3;            // Límite de bananas antes de perder
+
     private Rigidbody2D rb;
-
-    [Header("UI")]
-    public TextMeshProUGUI scoreText;     // Referencia al UI de puntaje
-    private int score = 0;
-
-    [Header("Meta")]
-    public GameObject winPanel;           // Panel opcional para mostrar "Ganaste"
+    private float moveInput;
+    private float rotationInput;
+    private int bananaCount = 0;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        // Evitar que el carro rote por físicas
-        rb.freezeRotation = true;
-        rb.angularVelocity = 0f; // resetear cualquier giro extraño al inicio
-
-        UpdateScoreUI();
     }
 
     void Update()
     {
-        // Input de movimiento
-        float moveInput = Input.GetAxis("Vertical");        // W/S o ↑↓
-        float rotationInput = -Input.GetAxis("Horizontal"); // A/D o ←→ (el "-" es importante)
-
-        // Movimiento hacia adelante / atrás
-        Vector2 forward = transform.up * moveInput * moveSpeed;
-        rb.linearVelocity = forward;
-
-        // Rotación controlada
-        rb.MoveRotation(rb.rotation + rotationInput * rotationSpeed * Time.deltaTime);
+        // Controles de movimiento
+        moveInput = Input.GetAxis("Vertical");   // Flechas ↑↓ o W/S
+        rotationInput = -Input.GetAxis("Horizontal"); // Flechas ←→ o A/D
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void FixedUpdate()
     {
-        // Coleccionable: energía
-        if (other.CompareTag("Energy"))
-        {
-            score++;
-            UpdateScoreUI();
-            Destroy(other.gameObject);
-        }
+        // Movimiento hacia adelante/atrás (invertido corregido con "-")
+        Vector2 forward = transform.up * (-moveInput) * moveSpeed * Time.fixedDeltaTime;
+        rb.MovePosition(rb.position + forward);
 
-        // Obstáculo: banana
-        if (other.CompareTag("Banana"))
-        {
-            Debug.Log("¡Pisaste una cáscara!");
-            score = Mathf.Max(0, score - 1); // restar sin ir negativo
-            UpdateScoreUI();
-        }
-
-        // Meta: fin de la carrera
-        if (other.CompareTag("Finish"))
-        {
-            Debug.Log("¡Ganaste la carrera!");
-            if (winPanel != null) winPanel.SetActive(true);
-            Time.timeScale = 0f; // pausa el juego
-        }
+        // Rotación
+        float rotation = rotationInput * rotationSpeed * Time.fixedDeltaTime;
+        rb.MoveRotation(rb.rotation + rotation);
     }
 
-    void UpdateScoreUI()
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if (scoreText != null)
+        // ⚡ Energía (tag = "Energy")
+        if (collision.CompareTag("Energy"))
         {
-            scoreText.text = "Puntos: " + score.ToString();
+            moveSpeed += speedBoost; // Aumenta la velocidad acumulativamente
+            Destroy(collision.gameObject);
+        }
+
+        // 🍌 Banana (tag = "Banana")
+        if (collision.CompareTag("Banana"))
+        {
+            bananaCount++;
+            Debug.Log("Pisaste una banana: " + bananaCount);
+
+            if (bananaCount >= maxBananas)
+            {
+                Debug.Log("¡Perdiste! Reiniciando...");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
         }
     }
 }

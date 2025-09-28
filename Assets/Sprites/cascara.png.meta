@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      cascara_0: 2889534374161709165
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
