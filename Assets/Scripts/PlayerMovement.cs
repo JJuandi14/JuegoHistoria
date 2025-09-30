@@ -6,9 +6,9 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movimiento")]
     public float moveSpeed = 8f;          // Velocidad base del carro
-    public float rotationSpeed = 200f;    // Velocidad de giro
-    public float speedBoost = 0.5f;       // Cuánto aumenta la velocidad por cada rayito
-    public float maxSpeed = 15f;          // 👈 límite de velocidad máxima
+    public float rotationSpeed = 100f;    // Velocidad de giro
+    public float speedBoost = 1f;       // Cuánto aumenta la velocidad por cada rayito
+    public float maxSpeed = 20f;          // 👈 límite de velocidad máxima
 
     [Header("Límites")]
     public int maxBananas = 3;            // Límite de bananas antes de perder
