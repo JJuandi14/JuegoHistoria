@@ -7,7 +7,7 @@ public class MenuUI : MonoBehaviour
     public GameObject panelCreditos;
     public GameObject panelConfig;
 
-    public string MainScene = "MainScene"; // cambia si tu escena se llama distinto
+    public string MainScene = "MainScene";
 
     void Start()
     {
